@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import PokemonCard from '@/components/cards/PokemonCard';
 
 export default function Home() {
-  const [pokemonList, setPokemonList] = useState(mockPokemonList);
+  const [pokemonList] = useState(mockPokemonList); // Supprimer setPokemonList
   const [filteredList, setFilteredList] = useState(mockPokemonList);
 
   const handleSearch = (query: string) => {
