@@ -1,0 +1,99 @@
+/* src/styles/globals.css */
+
+/* Importation de Tailwind CSS */
+@import 'tailwindcss';
+
+/* Variables personnalisées pour le thème clair/sombre */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 
+ * Scrollbar style (exemple personnalisé)
+ */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+/* Classes personnalisées pour les types Pokémon */
+.bg-fire {
+  background-color: #ff4500; /* Orange pour Fire */
+}
+.bg-water {
+  background-color: #6890f0; /* Bleu pour Water */
+}
+.bg-bug {
+  background-color: #a8b820; /* Vert olive pour Bug */
+}
+.bg-flying {
+  background-color: #a890f0; /* Violet clair pour Flying */
+}
+.bg-electric {
+  background-color: #f8d030; /* Jaune pour Electric */
+}
+.bg-ghost {
+  background-color: #705898; /* Violet foncé pour Ghost */
+}
+.bg-poison {
+  background-color: #a040a0; /* Violet pour Poison */
+}
+.bg-normal {
+  background-color: #a8a878; /* Beige pour Normal */
+}
+.bg-psychic {
+  background-color: #f85888; /* Rose pour Psychic */
+}
+.bg-steel {
+  background-color: #b8b8d0; /* Gris clair pour Steel */
+}
+.bg-rock {
+  background-color: #b8a038; /* Brun pour Rock */
+}
+.bg-grass {
+  background-color: #78c850; /* Vert pour Grass */
+}
+
+/* Classes de texte personnalisées */
+.text-headline {
+  font-size: 24px;
+}
+.text-subtitle1 {
+  font-size: 18px;
+}
+.text-body2 {
+  font-size: 14px;
+}
+.text-caption {
+  font-size: 12px;
+}
+.text-gray-medium {
+  color: #757575;
+}
+.text-gray-700 {
+  color: #4a4a4a;
+}
