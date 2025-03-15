@@ -42,7 +42,7 @@ export default function PokemonDetails({ pokemon }: { pokemon: Pokemon }) {
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: typeColor }}>
       <div className="p-4 relative">
-        {/* Pokéball en arrière-plan */}
+       
         <Image
           src="/Pokeball.svg"
           alt="Pokeball Background"
@@ -57,7 +57,7 @@ export default function PokemonDetails({ pokemon }: { pokemon: Pokemon }) {
 
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            {/* Redirection vers la page d'accueil (/) au lieu du Pokémon précédent */}
+      
             <Link href="/">
               <Image
                 src="/Vector (3).svg"
@@ -101,12 +101,12 @@ export default function PokemonDetails({ pokemon }: { pokemon: Pokemon }) {
         </div>
       </div>
 
-      <div className="bg-white rounded-t-3xl p-6 flex-1 relative z-10">
-        <div className="flex justify-center mt-2">
-          {pokemon.types.map((type: { type: { name: string } }) => (
-            <TypeBadge key={type.type.name} type={type.type.name} />
-          ))}
-        </div>
+          <div className="bg-white rounded-t-3xl p-6 flex-1 relative z-10">
+      <div className="flex justify-center mt-2 space-x-2"> {/* Ajout de space-x-2 pour espacer les badges */}
+        {pokemon.types.map((type: { type: { name: string } }) => (
+          <TypeBadge key={type.type.name} type={type.type.name} />
+        ))}
+      </div>
 
         <h2 className={`text-subtitle1 font-bold text-blue-700 mt-4 text-center`} style={{ color: typeColor }}>
           About
