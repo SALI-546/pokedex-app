@@ -1,4 +1,4 @@
-import '../styles/globals.css'; // Chemin relatif depuis src/app/ vers src/styles/
+import '../styles/globals.css'; 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

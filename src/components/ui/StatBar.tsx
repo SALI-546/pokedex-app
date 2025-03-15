@@ -1,4 +1,3 @@
-// src/components/ui/StatBar.tsx
 export default function StatBar({ name, value, type }: { name: string; value: number; type: string }) {
   const getStatBarColor = (type: string) => {
     const typeColors: { [key: string]: string } = {
@@ -19,9 +18,8 @@ export default function StatBar({ name, value, type }: { name: string; value: nu
   };
 
   return (
-    <div className="flex items-center space-x-2 mb-2">
-      <span className={`text-body2 w-16 ${getStatBarColor(type).split(' ')[1]}`}>{name}</span>
-      <div className="border-l border-gray-300 h-6 mx-2"></div>
+    <div className="flex items-center space-x-2 mb-2 relative">
+      <span className={`text-body2 w-16 ${getStatBarColor(type).split(' ')[1]}`}>{name.toLowerCase()}</span>
       <span className="text-body2 w-8">{value.toString().padStart(3, '0')}</span>
       <div className="flex-1 bg-gray-200 h-2 rounded-full">
         <div
@@ -29,6 +27,8 @@ export default function StatBar({ name, value, type }: { name: string; value: nu
           style={{ width: `${(value / 255) * 50}%` }}
         />
       </div>
+      
+      <div className="absolute left-[4rem] top-0 h-full border-l border-gray-300"></div>
     </div>
   );
 }

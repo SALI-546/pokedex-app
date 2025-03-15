@@ -1,19 +1,32 @@
-// src/app/pokemon/[id]/page.tsx
-import { mockPokemonDetails } from '@/mocks/pokemonData';
+import { getPokemonDetails, getPokemonSpecies, transformPokemonDetails } from '@/services/pokemonService';
 import PokemonDetails from '@/components/cards/PokemonDetails';
-import ChevronButton from '@/components/buttons/ChevronButton';
+import { PokemonDetails as PokemonDetailsType } from '@/types/pokemon';
 
-export default function PokemonPage({ params }: { params: { id: string } }) {
-  const pokemon = mockPokemonDetails.find(p => p.id === parseInt(params.id));
-  if (!pokemon) return <div>Pokémon not found</div>;
 
-  return (
-    <div className="min-h-screen">
-      <div className="flex justify-between p-4">
-        <ChevronButton direction="left" currentId={parseInt(params.id)} />
-        <ChevronButton direction="right" currentId={parseInt(params.id)} />
-      </div>
-      <PokemonDetails pokemon={pokemon} />
-    </div>
-  );
+interface PokemonPageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function PokemonPage({ params }: PokemonPageProps) {
+  
+  const resolvedParams = await params;
+  const id = parseInt(resolvedParams.id);
+
+  
+  if (isNaN(id) || id < 1 || id > 1010) {
+    return <div>Pokémon ID invalide</div>;
+  }
+
+  try {
+    const [pokemonData, speciesData] = await Promise.all([
+      getPokemonDetails(id),
+      getPokemonSpecies(id),
+    ]);
+    const pokemon: PokemonDetailsType = transformPokemonDetails(pokemonData, speciesData);
+
+    return <PokemonDetails pokemon={pokemon} />; 
+  } catch (error) {
+    console.error(`Error loading Pokémon details for ID ${id}:`, error);
+    return <div>Erreur lors du chargement des détails du Pokémon</div>;
+  }
 }
