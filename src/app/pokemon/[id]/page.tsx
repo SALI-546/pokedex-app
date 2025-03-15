@@ -1,5 +1,5 @@
 import { getPokemonDetails, getPokemonSpecies, transformPokemonDetails } from '@/services/pokemonService';
-import PokemonDetails from '@/components/cards/PokemonDetails';
+import PokemonDetails from '@/components/buttons/cards/PokemonDetails';
 import { PokemonDetails as PokemonDetailsType } from '@/types/pokemon';
 
 

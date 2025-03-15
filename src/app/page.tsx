@@ -2,16 +2,16 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Header from '@/components/Header';
-import PokemonCard from '@/components/cards/PokemonCard';
+import PokemonCard from '@/components/buttons/cards/PokemonCard';
 import { getPokemonList } from '@/services/pokemonService';
 
 export default function Home() {
   const [pokemonList, setPokemonList] = useState<{ id: number; name: string; image: string }[]>([]);
   const [filteredList, setFilteredList] = useState<{ id: number; name: string; image: string }[]>([]);
-  const [page, setPage] = useState(1); 
-  const limit = 20; 
+  const [page, setPage] = useState(1);
+  const limit = 20;
   const [isLoading, setIsLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true); 
+  const [hasMore, setHasMore] = useState(true);
 
   const fetchPokemonList = useCallback(async (pageNum: number) => {
     setIsLoading(true);
@@ -28,17 +28,15 @@ export default function Home() {
         };
       });
 
-      
       setPokemonList(prev => {
-        if (pageNum === 1) return newPokemons; 
+        if (pageNum === 1) return newPokemons;
         return [...prev, ...newPokemons];
       });
       setFilteredList(prev => {
-        if (pageNum === 1) return newPokemons; 
+        if (pageNum === 1) return newPokemons;
         return [...prev, ...newPokemons];
       });
 
-      
       setHasMore(data.results.length === limit && data.next !== null);
     } catch (error) {
       console.error('Error loading Pokémon list:', error);
@@ -48,7 +46,7 @@ export default function Home() {
   }, [limit]);
 
   useEffect(() => {
-    fetchPokemonList(1); 
+    fetchPokemonList(1);
   }, [fetchPokemonList]);
 
   const loadMore = () => {
@@ -63,9 +61,14 @@ export default function Home() {
       setFilteredList(pokemonList);
       return;
     }
-    const filtered = pokemonList.filter(pokemon =>
-      pokemon.name.toLowerCase().includes(query.toLowerCase())
-    );
+    const normalizedQuery = query.toLowerCase();
+    const filtered = pokemonList.filter(pokemon => {
+      if (normalizedQuery.startsWith('#')) {
+        const num = parseInt(normalizedQuery.replace('#', ''));
+        return pokemon.id === num;
+      }
+      return pokemon.name.toLowerCase().includes(normalizedQuery);
+    });
     setFilteredList(filtered);
   };
 

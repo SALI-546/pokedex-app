@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import TypeBadge from '../ui/TypeBadge';
-import StatBar from '../ui/StatBar';
-
+import TypeBadge from '../../ui/TypeBadge';
+import StatBar from '../../ui/StatBar';
 
 interface Pokemon {
   id: number;
@@ -37,9 +36,9 @@ export default function PokemonDetails({ pokemon }: { pokemon: Pokemon }) {
 
   const typeColor = getTypeColorValue(pokemon.types[0].type.name);
 
-  
-  const prevId = pokemon.id - 1 < 1 ? 1 : pokemon.id - 1; 
-  const nextId = pokemon.id + 1 > 1010 ? 1010 : pokemon.id + 1; 
+  const prevId = pokemon.id - 1 < 1 ? 1 : pokemon.id - 1;
+  const nextId = pokemon.id + 1 > 1010 ? 1010 : pokemon.id + 1;
+
   return (
     <div className="min-h-screen flex flex-col" style={{ backgroundColor: typeColor }}>
       <div className="p-4 relative">
@@ -51,18 +50,18 @@ export default function PokemonDetails({ pokemon }: { pokemon: Pokemon }) {
           height={208}
           className="absolute w-[206px] h-[208px] opacity-30 z-0"
           style={{
-            left: 'calc(50% - 103px + 40px)', 
-            top: '20px', 
+            left: 'calc(50% - 103px + 40px)',
+            top: '20px',
           }}
         />
 
-        
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <Link href={`/pokemon/${prevId}`}>
+            {/* Redirection vers la page d'accueil (/) au lieu du Pokémon précédent */}
+            <Link href="/">
               <Image
                 src="/Vector (3).svg"
-                alt="Previous Pokémon"
+                alt="Back to Home"
                 width={24}
                 height={24}
                 className="mr-2"
@@ -73,7 +72,6 @@ export default function PokemonDetails({ pokemon }: { pokemon: Pokemon }) {
           <span className="text-headline font-bold text-white">#{pokemon.id.toString().padStart(3, '0')}</span>
         </div>
 
-        
         <div className="flex justify-between items-center mt-4 relative z-10">
           <Link href={`/pokemon/${prevId}`}>
             <Image
@@ -89,7 +87,7 @@ export default function PokemonDetails({ pokemon }: { pokemon: Pokemon }) {
             alt={pokemon.name}
             width={160}
             height={160}
-            className="w-40 h-40 mx-auto relative z-10 mt-6" 
+            className="w-40 h-40 mx-auto relative z-10 mt-6"
           />
           <Link href={`/pokemon/${nextId}`}>
             <Image
@@ -103,21 +101,17 @@ export default function PokemonDetails({ pokemon }: { pokemon: Pokemon }) {
         </div>
       </div>
 
-      
       <div className="bg-white rounded-t-3xl p-6 flex-1 relative z-10">
-        
         <div className="flex justify-center mt-2">
           {pokemon.types.map((type: { type: { name: string } }) => (
             <TypeBadge key={type.type.name} type={type.type.name} />
           ))}
         </div>
 
-        
         <h2 className={`text-subtitle1 font-bold text-blue-700 mt-4 text-center`} style={{ color: typeColor }}>
           About
         </h2>
 
-       
         <div className="flex justify-between text-body2 mt-4 relative">
           <div className="text-center">
             <div className="flex justify-center items-center">
@@ -132,7 +126,7 @@ export default function PokemonDetails({ pokemon }: { pokemon: Pokemon }) {
             </div>
             <span className="text-caption text-gray-medium">Weight</span>
           </div>
-          
+
           <div className="border-l border-gray-300 h-10 mx-2"></div>
           <div className="text-center">
             <div className="flex justify-center items-center">
@@ -147,7 +141,7 @@ export default function PokemonDetails({ pokemon }: { pokemon: Pokemon }) {
             </div>
             <span className="text-caption text-gray-medium">Height</span>
           </div>
-          
+
           <div className="border-l border-gray-300 h-10 mx-2"></div>
           <div className="text-center">
             <span>{pokemon.abilities.join(', ')}</span>
@@ -156,10 +150,8 @@ export default function PokemonDetails({ pokemon }: { pokemon: Pokemon }) {
           </div>
         </div>
 
-       
         <p className="text-body2 mt-6 text-gray-700">{pokemon.description}</p>
 
-        
         <section>
           <h2 className={`text-subtitle1 font-bold text-blue-700 mt-6 text-center`} style={{ color: typeColor }}>
             Base Stats
